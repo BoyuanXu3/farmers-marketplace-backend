@@ -111,7 +111,7 @@ def create_product():
             "quantity":    quantity,
             "imageUrl":    image_url,
             "category":    category,
-            # updatedAt 由数据库自动生成
+            # updatedAt
         }), 201
 
     except Error as e:
@@ -123,7 +123,6 @@ def update_product(product_id):
     fields = []
     values = []
 
-    # 允许更新 category
     for key in ("name", "description", "price", "quantity", "image_url", "category"):
         if key in data:
             fields.append(f"{key} = %s")

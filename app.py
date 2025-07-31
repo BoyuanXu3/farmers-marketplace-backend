@@ -9,20 +9,19 @@ from routes.orders import bp as orders_bp
 from routes.sales import sales_bp
 from db import get_db_connection
 
-load_dotenv()  # 加载 .env
+load_dotenv()  # load .env
 
 app = Flask(__name__)
 app.register_blueprint(products_bp, url_prefix="/api/products")
 app.register_blueprint(orders_bp, url_prefix="/api/orders")
 app.register_blueprint(sales_bp, url_prefix="/api/sales")
-# app.py（在文件最上面）  
+# app.py
 import os  
 print("Loading env vars:")  
 print("  DB_HOST    =", os.getenv("DB_HOST"))  
 print("  DB_USER    =", os.getenv("DB_USER"))  
 print("  DB_PASSWORD=", os.getenv("DB_PASSWORD"))  
 print("  DB_NAME    =", os.getenv("DB_NAME"))  
-# 其余代码不变...
 
 @app.route("/")
 def index():
@@ -44,9 +43,7 @@ def get_products():
         ]
         return jsonify(products)
     except Error as e:
-        # 如果出错，返回 500 和错误信息
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    # debug 模式下自动重载，并显示详细错误
     app.run(debug=True, host="0.0.0.0", port=5000)

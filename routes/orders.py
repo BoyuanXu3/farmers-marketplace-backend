@@ -4,7 +4,7 @@ from db import get_db_connection
 
 bp = Blueprint("orders", __name__)
 
-# 获取指定 farmer_id 的所有订单（按创建时间降序）
+# get orders of farmer_id 
 @bp.route("/<int:farmer_id>", methods=["GET"])
 def get_orders_by_farmer(farmer_id):
     try:
@@ -36,7 +36,7 @@ def get_orders_by_farmer(farmer_id):
     except Error as e:
         return jsonify({"error": str(e)}), 500
 
-# 更新指定订单的状态
+# post status
 @bp.route("/<int:order_id>/status", methods=["PUT"])
 def update_order_status(order_id):
     try:
